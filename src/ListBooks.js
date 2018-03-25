@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ListBooks extends Component {
-  getBooksByShelf(shelf) {
-    let booksByShelf = [];
-    this.props.books.map((book) => {
-      if (book.shelf === shelf)
-        booksByShelf.push(book);
-    });
-    return booksByShelf;
-  }
-
   render () {
     return (
       <div className="list-books">
@@ -22,7 +14,7 @@ class ListBooks extends Component {
               <h2 className="bookshelf-title">Currently Reading</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  {this.getBooksByShelf('currentlyReading').map((book) => (
+                  {this.props.books.filter( book => book.shelf === 'currentlyReading').map((book) => (
                     <li key={book.id}>
                       <div className="book">
                         <div className="book-top">
@@ -49,7 +41,7 @@ class ListBooks extends Component {
               <h2 className="bookshelf-title">Want to Reaad</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  {this.getBooksByShelf('wantToRead').map((book) => (
+                  {this.props.books.filter( book => book.shelf === 'wantToRead').map((book) => (
                     <li key={book.id}>
                       <div className="book">
                         <div className="book-top">
@@ -76,7 +68,7 @@ class ListBooks extends Component {
               <h2 className="bookshelf-title">Read</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  {this.getBooksByShelf('read').map((book) => (
+                  {this.props.books.filter( book => book.shelf === 'read').map((book) => (
                     <li key={book.id}>
                       <div className="book">
                         <div className="book-top">
@@ -102,7 +94,7 @@ class ListBooks extends Component {
           </div>
         </div>
         <div className="open-search">
-          <a onClick={() => this.props.onClickPlus(true)}>Add a book</a>
+          <Link to="/search">Add a book</Link>
         </div>
       </div>
     )

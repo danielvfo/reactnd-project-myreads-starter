@@ -16,7 +16,7 @@ class BooksApp extends React.Component {
     books: []
   }
 
-  componentDidMount() {
+  componentWillMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({books});
     });

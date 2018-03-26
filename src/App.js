@@ -18,15 +18,19 @@ class BooksApp extends React.Component {
 
   componentWillMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState({books});
+      this.setState({books})
     });
   }
 
   render() {
     return (
       <div className="app">
-        <Route path="/search" render={({history}) => (
-          <SearchBooks/>
+        <Route exact path="/search" render={() => (
+          <SearchBooks
+            onSearchBooks={(query) => {
+              this.searchBooks(query);
+            }}
+          />
         )}/>
         <Route exact path="/" render={() => (
           <ListBooks

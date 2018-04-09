@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Book from './Book';
 
 class ListBooks extends Component {
   render () {
@@ -15,24 +16,10 @@ class ListBooks extends Component {
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {this.props.books.filter( book => book.shelf === 'currentlyReading').map((book) => (
-                    <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
-                          <div className="book-shelf-changer">
-                            <select>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        <div className="book-authors">{book.authors}</div>
-                      </div>
-                    </li>
+                    <Book
+                      key={book.id}
+                      book={book}
+                    />
                   ))}
                 </ol>
               </div>
@@ -42,24 +29,10 @@ class ListBooks extends Component {
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {this.props.books.filter( book => book.shelf === 'wantToRead').map((book) => (
-                    <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
-                          <div className="book-shelf-changer">
-                            <select>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        <div className="book-authors">{book.authors}</div>
-                      </div>
-                    </li>
+                    <Book
+                      key={book.id}
+                      book={book}
+                    />
                   ))}
                 </ol>
               </div>
@@ -69,24 +42,10 @@ class ListBooks extends Component {
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {this.props.books.filter( book => book.shelf === 'read').map((book) => (
-                    <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
-                          <div className="book-shelf-changer">
-                            <select>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        <div className="book-authors">{book.authors}</div>
-                      </div>
-                    </li>
+                    <Book
+                      key={book.id}
+                      book={book}
+                    />
                   ))}
                 </ol>
               </div>

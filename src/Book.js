@@ -16,8 +16,9 @@ class Book extends Component {
   showContextMenu(book) {
     if (book.shelf === 'currentlyReading') {
       return (
-        <select value="default" id={book.id} onChange={this.handleChange}>
-          <option value="default" disabled>Move to...</option>
+        <select value="currentlyReading" id={book.id} onChange={this.handleChange}>
+          <option value="disabled" disabled>Move to...</option>
+          <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
           <option value="read">Read</option>
           <option value="none">None</option>
@@ -25,29 +26,32 @@ class Book extends Component {
       );
     } else if (book.shelf === 'wantToRead') {
       return (
-        <select value="default" id={book.id} onChange={this.handleChange}>
-          <option value="default" disabled>Move to...</option>
-          <option value="currentlyReading" >Currently Reading</option>
+        <select value="wantToRead" id={book.id} onChange={this.handleChange}>
+          <option value="disabled" disabled>Move to...</option>
+          <option value="currentlyReading">Currently Reading</option>
+          <option value="wantToRead">Want to Read</option>
           <option value="read">Read</option>
           <option value="none">None</option>
         </select>
       );
     } else if (book.shelf === 'read') {
       return (
-        <select value="default" id={book.id} onChange={this.handleChange}>
-          <option value="default" disabled>Move to...</option>
+        <select value="read" id={book.id} onChange={this.handleChange}>
+          <option value="disabled" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
+          <option value="read">Read</option>
           <option value="none">None</option>
         </select>
       );
     } else {
       return (
-        <select value="default" id={book.id} onChange={this.handleChange}>
-          <option value="default" disabled>Move to...</option>
+        <select value="none" id={book.id} onChange={this.handleChange}>
+          <option value="other" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
           <option value="read">Read</option>
+          <option value="none">None</option>
         </select>
       );
     }

@@ -23,6 +23,8 @@ class BooksApp extends React.Component {
     });
   }
 
+  //I had to force the creation of a book object on line 20 beacause I wasn't getting
+  //a reponse from the server when trying to get a book by its ID
   // getBookByID(id) {
   //   BooksAPI.get(id).then((book) => {
   //     this.setState({updatedBook: book})

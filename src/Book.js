@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class Book extends Component {
+  handleChange = (event) => {
+    this.props.onUpdateBook(event.target.id, event.target.value);
+  }
+
   hasBackgroundImage(book) {
     if (book.imageLinks)
       return <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>;
@@ -12,8 +16,8 @@ class Book extends Component {
   showContextMenu(book) {
     if (book.shelf === 'currentlyReading') {
       return (
-        <select>
-          <option value="none" disabled>Move to...</option>
+        <select value="default" id={book.id} onChange={this.handleChange}>
+          <option value="default" disabled>Move to...</option>
           <option value="wantToRead">Want to Read</option>
           <option value="read">Read</option>
           <option value="none">None</option>
@@ -21,17 +25,17 @@ class Book extends Component {
       );
     } else if (book.shelf === 'wantToRead') {
       return (
-        <select>
-          <option value="none" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
+        <select value="default" id={book.id} onChange={this.handleChange}>
+          <option value="default" disabled>Move to...</option>
+          <option value="currentlyReading" >Currently Reading</option>
           <option value="read">Read</option>
           <option value="none">None</option>
         </select>
       );
     } else if (book.shelf === 'read') {
       return (
-        <select>
-          <option value="none" disabled>Move to...</option>
+        <select value="default" id={book.id} onChange={this.handleChange}>
+          <option value="default" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
           <option value="none">None</option>
@@ -39,8 +43,8 @@ class Book extends Component {
       );
     } else {
       return (
-        <select>
-          <option value="none" disabled>Move to...</option>
+        <select value="default" id={book.id} onChange={this.handleChange}>
+          <option value="default" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
           <option value="read">Read</option>

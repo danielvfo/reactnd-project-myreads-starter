@@ -22,6 +22,7 @@ class SearchBooks extends Component {
             <Book
               key={book.id}
               book={book}
+              onUpdateBook={this.props.onUpdateBook}
             />
           ))}
         </ol>

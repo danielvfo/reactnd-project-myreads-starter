@@ -14,47 +14,15 @@ class Book extends Component {
   }
 
   showContextMenu(book) {
-    if (book.shelf === 'currentlyReading') {
-      return (
-        <select value="currentlyReading" id={book.id} onChange={this.handleChange}>
-          <option value="disabled" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">Read</option>
-          <option value="none">None</option>
-        </select>
-      );
-    } else if (book.shelf === 'wantToRead') {
-      return (
-        <select value="wantToRead" id={book.id} onChange={this.handleChange}>
-          <option value="disabled" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">Read</option>
-          <option value="none">None</option>
-        </select>
-      );
-    } else if (book.shelf === 'read') {
-      return (
-        <select value="read" id={book.id} onChange={this.handleChange}>
-          <option value="disabled" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">Read</option>
-          <option value="none">None</option>
-        </select>
-      );
-    } else {
-      return (
-        <select value="none" id={book.id} onChange={this.handleChange}>
-          <option value="other" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">Read</option>
-          <option value="none">None</option>
-        </select>
-      );
-    }
+    return (
+      <select value={book.shelf} id={book.id} onChange={this.handleChange}>
+        <option value="disabled" disabled>Move to...</option>
+        <option value="currentlyReading">Currently Reading</option>
+        <option value="wantToRead">Want to Read</option>
+        <option value="read">Read</option>
+        <option value="none">None</option>
+      </select>
+    );
   }
 
   render () {
@@ -68,7 +36,7 @@ class Book extends Component {
             </div>
           </div>
           <div className="book-title">{this.props.book.title}</div>
-          <div className="book-authors">{this.props.book.authors}</div>
+          <div className="book-authors">{this.props.book.authors.join(', ')}</div>
         </div>
       </li>
     );

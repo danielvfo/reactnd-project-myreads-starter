@@ -1,38 +1,50 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Debounce } from 'react-throttle';
 import * as BooksAPI from './BooksAPI';
 import Book from './Book';
 
 class SearchBooks extends Component {
   state = {
-    searchedBooks: []
+    books: []
   }
 
   searchBooks(query) {
-    BooksAPI.search(query).then((searchedBooks) => {
-      this.setState({searchedBooks});
-    });
-  }
-
-  listBooks(searchedBooks) {
-    if (searchedBooks instanceof Array) {
-      return (
-        <ol className="books-grid">
-          {searchedBooks.map((book) => (
-            <Book
-              key={book.id}
-              book={book}
-              onUpdateBook={this.props.onUpdateBook}
-            />
-          ))}
-        </ol>
-      )
+    if (query) {
+      BooksAPI.search(query).then((searchedBooks) => {
+        this.setState({ books: searchedBooks });
+      });
     } else {
-      return <h2>No match found.</h2>;
+      this.setState({ books: [] });
     }
   }
 
+  filterBooks(books) {
+    var showingBooks = books.filter((book) => {
+      return !this.props.shelfBooks.some((item) => {
+        return book.id === item.id;
+      });
+    });
+    return showingBooks;
+  }
+
+  listBooks(books) {
+    var showingBooks = this.filterBooks(books);
+    return (
+      <ol className="books-grid">
+        {showingBooks.map((book) => (
+          <Book
+            key={book.id}
+            book={book}
+            onUpdateBook={this.props.onUpdateBook}
+          />
+        ))}
+      </ol>
+    )
+  }
+
   render() {
+    const {books} = this.state;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -46,15 +58,17 @@ class SearchBooks extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input
-              type="text"
-              placeholder="Search by title or author"
-              onChange={(event) => this.searchBooks(event.target.value)}
-            />
+            <Debounce time="600" handler="onChange">
+              <input
+                type="text"
+                placeholder="Search by title or author"
+                onChange={(event) => this.searchBooks(event.target.value)}
+              />
+            </Debounce>
           </div>
         </div>
         <div className="search-books-results">
-          {this.listBooks(this.state.searchedBooks)}
+          {books.length > 0 && this.listBooks(books)}
         </div>
       </div>
     )

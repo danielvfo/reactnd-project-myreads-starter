@@ -15,7 +15,7 @@ class Book extends Component {
 
   showContextMenu(book) {
     return (
-      <select value={book.shelf} id={book.id} onChange={this.handleChange}>
+      <select value={book.shelf ? book.shelf : 'none'} id={book.id} onChange={this.handleChange}>
         <option value="disabled" disabled>Move to...</option>
         <option value="currentlyReading">Currently Reading</option>
         <option value="wantToRead">Want to Read</option>
@@ -26,6 +26,8 @@ class Book extends Component {
   }
 
   render () {
+    const {authors} = this.props.book;
+    const {title} = this.props.book;
     return (
       <li>
         <div className="book">
@@ -35,8 +37,8 @@ class Book extends Component {
               {this.showContextMenu(this.props.book)}
             </div>
           </div>
-          <div className="book-title">{this.props.book.title}</div>
-          <div className="book-authors">{this.props.book.authors.join(', ')}</div>
+          <div className="book-title">{title && title}</div>
+          <div className="book-authors">{authors && authors.join(', ')}</div>
         </div>
       </li>
     );

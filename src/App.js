@@ -45,6 +45,7 @@ class BooksApp extends React.Component {
             onUpdateBook={(id, shelf) => {
               this.updateBook(id, shelf);
             }}
+            shelfBooks={this.state.books}
           />
         )}/>
         <Route exact path="/" render={() => (

@@ -7,9 +7,9 @@ class Book extends Component {
 
   hasBackgroundImage(book) {
     if (book.imageLinks)
-      return <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>;
+      return <div className="book-cover" style={{ backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>;
     else {
-      return <div className="book-cover" style={{ width: 128, height: 193 }}></div>;
+      return <div className="book-cover"></div>;
     }
   }
 

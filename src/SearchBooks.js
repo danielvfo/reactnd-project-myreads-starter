@@ -9,30 +9,31 @@ class SearchBooks extends Component {
     books: []
   }
 
-  searchBooks(query) {
+  async searchBooks(query) {
+    let books = [];
+    await BooksAPI.search(query).then((searchedBooks) => {
+      books = searchedBooks;
+    });
+    this.getWholeBooks(books, query);
+  }
+
+  getWholeBooks(books, query) {
+    this.setState({ books: [] });
     if (query) {
-      BooksAPI.search(query).then((searchedBooks) => {
-        this.setState({ books: searchedBooks });
+      books.forEach((book) => {
+        BooksAPI.get(book.id).then((item) => {
+          this.setState(prevState => ({
+            books: prevState.books.concat([ item ])
+          }))
+        });
       });
-    } else {
-      this.setState({ books: [] });
     }
   }
 
-  filterBooks(books) {
-    var showingBooks = books.filter((book) => {
-      return !this.props.shelfBooks.some((item) => {
-        return book.id === item.id;
-      });
-    });
-    return showingBooks;
-  }
-
   listBooks(books) {
-    var showingBooks = this.filterBooks(books);
     return (
       <ol className="books-grid">
-        {showingBooks.map((book) => (
+        {books.map((book) => (
           <Book
             key={book.id}
             book={book}

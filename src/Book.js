@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class Book extends Component {
+class Book extends PureComponent {
   handleChange = (event) => {
     this.props.onUpdateBook(event.target.id, event.target.value);
   }

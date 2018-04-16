@@ -7,9 +7,7 @@ class Shelf extends Component {
       return (
         <div className="bookshelf">
           <div>
-            {books[0].shelf === 'currentlyReading' && (<h2 className="bookshelf-title">Currently Reading</h2>)}
-            {books[0].shelf === 'wantToRead' && (<h2 className="bookshelf-title">Want to Read</h2>)}
-            {books[0].shelf === 'read' && (<h2 className="bookshelf-title">Read</h2>)}
+            <h2 className="bookshelf-title">{this.props.title}</h2>
           </div>
           <div className="bookshelf-books">
             <ol className="books-grid">

@@ -6,10 +6,16 @@ import Book from './Book';
 
 class SearchBooks extends Component {
   state = {
+    query: '',
     books: []
   }
 
+  refresh = (query) => {
+    this.searchBooks(query);
+  }
+
   async searchBooks(query) {
+    this.setState({query});
     let books = [];
     await BooksAPI.search(query).then((searchedBooks) => {
       books = searchedBooks;
@@ -18,7 +24,7 @@ class SearchBooks extends Component {
   }
 
   getWholeBooks(books, query) {
-    this.setState({ books: [] });
+    this.setState({ books: [] })
     if (query) {
       books.forEach((book) => {
         BooksAPI.get(book.id).then((item) => {
@@ -38,6 +44,8 @@ class SearchBooks extends Component {
             key={book.id}
             book={book}
             onUpdateBook={this.props.onUpdateBook}
+            query={this.state.query}
+            refresh={this.refresh}
           />
         ))}
       </ol>

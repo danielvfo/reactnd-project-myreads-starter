@@ -3,13 +3,16 @@ import React, { PureComponent } from 'react';
 class Book extends PureComponent {
   handleChange = (event) => {
     this.props.onUpdateBook(event.target.id, event.target.value);
+    if (this.props.query) {
+      this.props.refresh(this.props.query);
+    }
   }
 
   hasBackgroundImage(book) {
     if (book.imageLinks)
       return <div className="book-cover" style={{ backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>;
     else {
-      return <div className="book-cover"></div>;
+      return <div className="book-cover" />;
     }
   }
 
@@ -26,8 +29,7 @@ class Book extends PureComponent {
   }
 
   render () {
-    const {authors} = this.props.book;
-    const {title} = this.props.book;
+    const { book: { authors, title } } = this.props;
     return (
       <li>
         <div className="book">
